@@ -1,35 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Card from "./Card";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [arr, setArr] = useState([]);
+  const [search, setSearch] = useState("");
+  const [pokemon, setPokemon] = useState({});
+  useEffect(() => {
+    for (let i = 1; i <= 101; i++) {
+      axios
+        .get(`https://pokeapi.co/api/v2/pokemon/${i}`)
+        .then((res) => {
+          setArr((arr) => [...arr, res.data]);
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+    , []);
 
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon/${search}`)
+      .then((res) => {
+        setPokemon(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="card-container">
+        <div className="search">
+          <input
+            type="text"
+            placeholder="Search Pokemon"
+            value={search}
+            onChange={handleChange}
+          />
+          <button type='submit' onClick={handleChange}>Search</button>
+          {
+          pokemon.name && <Card
+            name={pokemon.name}
+            img={pokemon.sprites.other.dream_world.front_default}
+            height={pokemon.height}
+            weight={pokemon.weight}
+            ability={pokemon.abilities[0].ability.name}
+
+          />
+        }
+        </div>
+
+
+        {arr.map((item, i) => {
+          return (
+            <Card
+              key={i}
+              name={item.name}
+              img={item.sprites.other.dream_world.front_default}
+              height={item.height}
+              weight={item.weight}
+              ability={item.abilities[0].ability.name}
+
+            />
+          );
+        })}
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
