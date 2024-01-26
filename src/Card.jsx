@@ -1,6 +1,7 @@
 import React from 'react'
 import './Card.css'
-const Card = ({name,img,height,weight}) => {
+import { Link } from 'react-router-dom'
+const Card = ({name,img,height,weight,key}) => {
   return (
     <>
     <div className='card'>
@@ -14,6 +15,9 @@ const Card = ({name,img,height,weight}) => {
         <h3>
             Weight: {weight} kg
         </h3>
+        <Link to={`/${name}`}>
+          <button>View</button>
+        </Link>
     </div>
     </>
   )
