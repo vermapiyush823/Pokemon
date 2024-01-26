@@ -45,8 +45,6 @@ function App() {
             img={pokemon.sprites.other.dream_world.front_default}
             height={pokemon.height}
             weight={pokemon.weight}
-            ability={pokemon.abilities[0].ability.name}
-
           />
         }
         </div>
@@ -60,8 +58,6 @@ function App() {
               img={item.sprites.other.dream_world.front_default}
               height={item.height}
               weight={item.weight}
-              ability={item.abilities[0].ability.name}
-
             />
           );
         })}
