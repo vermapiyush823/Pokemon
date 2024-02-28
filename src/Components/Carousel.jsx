@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import pokeball from '../assets/pokeball.png'
-import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons'
-// give cmd 
-import './Home.css'
-const Carousel = ({ images ,name}) => {
+import React, { useState } from "react";
+import "./Carousel.css";
+import ChevronLeftOutlinedIcon from "@mui/icons-material/ChevronLeftOutlined";
+import ChevronRightOutlinedIcon from "@mui/icons-material/ChevronRightOutlined";
+import "./Home.css";
+const Carousel = ({ images, name }) => {
   const [current, setCurrent] = useState(0);
   const length = images.length;
   const nextSlide = () => {
+    // stay on same slide for 3 second
     setCurrent(current === length - 1 ? 0 : current + 1);
   };
   const prevSlide = () => {
@@ -15,10 +16,16 @@ const Carousel = ({ images ,name}) => {
   if (!Array.isArray(images) || images.length <= 0) {
     return null;
   }
-  // make slide go to next after 1 seconds 
+  // make slide go to next after 1 seconds
   setTimeout(() => {
     setCurrent(current === length - 1 ? 0 : current + 1);
   }, 3000);
+  const colorChange = () => {
+    // give random hex color
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    return `#${randomColor}`;
+  };
+  console.log(name);
   return (
     <section className="slider">
       <div className="carousel">
@@ -26,29 +33,43 @@ const Carousel = ({ images ,name}) => {
           {images.map((image, index) => {
             return (
               <div
-                className={index === current ? 'slide active' : 'slide'}
+                className={index === current ? "slide active" : "slide"}
                 key={index}
               >
                 {index === current && (
-                  <img src={image} alt="pokemon" className="image" />
+                  <img
+                    src={image}
+                    alt="pokemon"
+                    className="image"
+                    style={{
+                      webkitFilter: `drop-shadow(0px 0px 0px ${colorChange()})`,
+                      filter: `drop-shadow(10px 20px 40px ${colorChange()})`,
+                    }}
+                  ></img>
                 )}
               </div>
             );
           })}
+          <div className="name">
+            <h1 
+              style={{
+                webkitTextStroke: `1px ${colorChange()}`,
+                textStroke: `1px ${colorChange()}`,
+              }}
+            >
+              {name[current]}
+            </h1>
+          </div>
           <button className="prev" onClick={prevSlide}>
-            prev
+              {"<"}
           </button>
           <button className="next" onClick={nextSlide}>
-            next
+            <ChevronRightOutlinedIcon  className="next-btn"/>
           </button>
-        </div>
-        <div className="pokemon-name">
-          <h1>{name[current]}</h1>
         </div>
       </div>
     </section>
   );
-
 };
 
 export default Carousel;
