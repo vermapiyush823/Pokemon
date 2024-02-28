@@ -1,102 +1,36 @@
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-.carousel {
-    width: 100%;
-    height: 60vh;
-    margin: 40px 0;
-    background: #fff;
+.logo{
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5px;
 }
-.carousel.carousel-slider {
-    overflow: visible;
-}
-.carousel .slider-wrapper {
-    overflow: visible;
-    width: auto;
-}
-.car-ctn {
-    height: 70vh;
-}
-.blur {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    filter: blur(40px);
-    height: 90%;
-    width: 100%;
-    background-color: #ff1010;
-}
-.car-image {
-    height: 60%;
-    filter: drop-shadow(0px 0px 10px #ff1010);
-    animation: updown 1s linear infinite;
-}
-.car-name {
-    margin: 0%;
-    font-family: "Brush Script MT", cursive;
-    font-weight: 500;
-    font-size: 5rem;
-    animation: scale 1s linear infinite;
-    text-decoration: double;
-    color: #ffffff;
-    text-shadow: 0 0 3px #d70101, 0 0 5px #ff1010;
-    text-transform: uppercase;
-}
-@keyframes scale {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-@keyframes updown {
-    0% {
-        transform: translate(0%, 0%);
-    }
-    50% {
-        transform: translate(0%, 20%);
-    }
-    100% {
-        transform: translate(0%, 0%);
-    }
-}
-.heading-container {
-    display: flex;
-    margin-top: 1rem;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-.heading {
-    font-family: "popins", sans-serif;
-    font-weight: 500;
-    text-align: center;
-    font-size: 2rem;
-}
-.pokeball {
+.logo img{
     width: 50px;
     height: 50px;
-    position: absolute;
-    left: 60%;
-    top: 48%;
-    transform: translate(-50%, -50%);
     animation: spin 2s linear infinite;
 }
-@keyframes spin {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
+.logo span{
+    font-family: 'Brush Script MT', cursive;
+    font-weight: 500;
+    font-size: 2rem;
+}
+@keyframes spin{
+    0%{
+        transform: rotate(0deg);
     }
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg);
+    100%{
+        transform: rotate(360deg);
     }
 }
+.carousel{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(255,16,16);
+background: linear-gradient(90deg, rgba(255,255,255,1) 52%, rgba(255,16,16,1) 52%);
+    clip-path: ellipse(95% 90% at 35% 92%);
+}
+
